@@ -1,3 +1,4 @@
+import chalk from 'chalk'
 import { useEffect, useState } from 'react'
 import './App.css'
 import reactLogo from './assets/react.svg'
@@ -18,7 +19,7 @@ function App() {
       const dropper = new window.EyeDropper()
       setOpen(true)
       const color = await dropper.open()
-      if (color) console.log(color.sRGBHex)
+      if (color) console.log(chalk.hex(color.sRGBHex)(color.sRGBHex))
       setColor(color?.sRGBHex)
     } catch (e) {
       console.error(e)
