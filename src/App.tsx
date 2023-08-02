@@ -1,10 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import './App.css'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [color, setColor] = useState<string>()
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (color) document.body.style.backgroundColor = color
+  }, [color])
+
+  async function pick() {
+    try {
+      if (!window.EyeDropper)
+        throw new Error('EyeDropper not supported in this browser')
+      const dropper = new window.EyeDropper()
+      setOpen(true)
+      const color = await dropper.open()
+      if (color) console.log(color.sRGBHex)
+      setColor(color?.sRGBHex)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setOpen(false)
+    }
+  }
 
   return (
     <>
@@ -17,9 +38,11 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <div className="card" style={{ backgroundColor: color }}>
+        <button onClick={pick}>
+          {open
+            ? 'Click anywhere on the screen to select a color, or press ESCAPE to cancel.'
+            : 'Pick a color'}
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
