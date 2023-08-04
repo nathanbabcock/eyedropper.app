@@ -2,14 +2,32 @@ import chalk from 'chalk'
 import { useEffect, useState } from 'react'
 import './App.css'
 import reactLogo from './assets/react.svg'
+import {
+  shouldShowOnDarkBackground,
+  shouldShowOnLightBackground,
+} from './util/color-contrast'
+import { preferredColorScheme } from './util/prefers-color-scheme'
 import viteLogo from '/vite.svg'
+
+function logColor(color: string) {
+  const consoleHasDarkBg = preferredColorScheme() === 'dark'
+
+  let bgColorFunction = (x: string) => x
+  if (consoleHasDarkBg && shouldShowOnLightBackground(color))
+    bgColorFunction = chalk.bgWhite
+  else if (!consoleHasDarkBg && shouldShowOnDarkBackground(color))
+    bgColorFunction = chalk.bgBlack
+  console.log(bgColorFunction(chalk.hex(color)(` ■ ${color} `)))
+}
 
 function App() {
   const [color, setColor] = useState<string>()
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    if (color) document.body.style.backgroundColor = color
+    if (!color) return
+    document.body.style.backgroundColor = color
+    logColor(color)
   }, [color])
 
   async function pick() {
@@ -19,7 +37,6 @@ function App() {
       const dropper = new window.EyeDropper()
       setOpen(true)
       const color = await dropper.open()
-      if (color) console.log(chalk.hex(color.sRGBHex)(color.sRGBHex))
       setColor(color?.sRGBHex)
     } catch (e) {
       console.error(e)
