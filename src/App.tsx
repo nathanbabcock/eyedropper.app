@@ -1,13 +1,14 @@
+/// <reference types="vite-plugin-svgr/client" />
+
 import chalk from 'chalk'
 import { useEffect, useState } from 'react'
 import './App.css'
-import reactLogo from './assets/react.svg'
+import { ReactComponent as EyedropperIcon } from './assets/eyedropper.svg'
 import {
   shouldShowOnDarkBackground,
   shouldShowOnLightBackground,
 } from './util/color-contrast'
 import { preferredColorScheme } from './util/prefers-color-scheme'
-import viteLogo from '/vite.svg'
 
 function logColor(color: string) {
   const consoleHasDarkBg = preferredColorScheme() === 'dark'
@@ -47,17 +48,9 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
       <div className="card" style={{ backgroundColor: color }}>
         <button onClick={pick}>
+          <EyedropperIcon />
           {open
             ? 'Click anywhere on the screen to select a color, or press ESCAPE to cancel.'
             : 'Pick a color'}
