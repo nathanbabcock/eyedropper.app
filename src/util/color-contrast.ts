@@ -25,8 +25,6 @@ export function shouldShowOnLightBackground(hex: string): boolean {
   const rgb = hexToRgb(hex)
   const brightness = getPerceivedBrightness(rgb)
 
-  console.log({ brightness })
-
   // You can adjust the threshold based on your preference
   return brightness < 64
 }
@@ -34,8 +32,6 @@ export function shouldShowOnLightBackground(hex: string): boolean {
 export function shouldShowOnDarkBackground(hex: string): boolean {
   const rgb = hexToRgb(hex)
   const brightness = getPerceivedBrightness(rgb)
-
-  console.log({ brightness })
 
   // You can adjust the threshold based on your preference
   return brightness > 255 - 64
