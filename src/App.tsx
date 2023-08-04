@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { ReactComponent as EyedropperIcon } from './assets/eyedropper.svg'
 import {
+  hexToRgb,
   shouldShowOnDarkBackground,
   shouldShowOnLightBackground,
 } from './util/color-contrast'
@@ -23,6 +24,7 @@ function logColor(color: string) {
 
 function App() {
   const [color, setColor] = useState<string>()
+  const rgb = color ? hexToRgb(color) : undefined
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -48,20 +50,24 @@ function App() {
 
   return (
     <>
-      <div className="card" style={{ backgroundColor: color }}>
-        <button onClick={pick}>
-          <EyedropperIcon />
-          {open
-            ? 'Click anywhere on the screen to select a color, or press ESCAPE to cancel.'
-            : 'Pick a color'}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <button onClick={pick}>
+        <EyedropperIcon />
+        {open
+          ? 'Click anywhere on the screen to select a color, or press ESCAPE to cancel.'
+          : 'Pick a color'}
+      </button>
+      {color && (
+        <div>
+          <div>
+            <code>{color}</code>
+          </div>
+          <div>
+            <code>
+              rgb({rgb!.r}, {rgb!.g}, {rgb!.b})
+            </code>
+          </div>
+        </div>
+      )}
     </>
   )
 }
