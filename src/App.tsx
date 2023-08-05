@@ -52,9 +52,7 @@ function App() {
     <>
       <button onClick={pick}>
         <EyedropperIcon />
-        {open
-          ? 'Click anywhere on the screen to select a color, or press ESCAPE to cancel.'
-          : 'Pick a color'}
+        Pick a color
       </button>
       {color && (
         <div>
