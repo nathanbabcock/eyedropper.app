@@ -56,9 +56,11 @@ function App() {
     <>
       <div className="animatedCircle" style={{ backgroundColor: color }} />
       <div className="foreground">
-        <button onClick={pick}>
+        <button
+          onClick={pick}
+          style={{ borderRadius: '50%', padding: 50, width: 200, height: 200 }}
+        >
           <EyedropperIcon />
-          Pick a color
         </button>
         {color && (
           <div>

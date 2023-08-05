@@ -86,4 +86,5 @@ button:focus-visible {
 .foreground {
   position: relative;
   z-index: var(--z-foreground);
+  /* mix-blend-mode: difference; */
 }
