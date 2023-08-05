@@ -33,7 +33,7 @@ function App() {
 
   useEffect(() => {
     if (!color) return
-    document.body.style.backgroundColor = color
+    // document.body.style.backgroundColor = color
     logColor(color)
   }, [color])
 
@@ -54,22 +54,25 @@ function App() {
 
   return (
     <>
-      <button onClick={pick}>
-        <EyedropperIcon />
-        Pick a color
-      </button>
-      {color && (
-        <div>
+      <div className="animatedCircle" style={{ backgroundColor: color }} />
+      <div className="foreground">
+        <button onClick={pick}>
+          <EyedropperIcon />
+          Pick a color
+        </button>
+        {color && (
           <div>
-            <code>{color}</code>
+            <div>
+              <code>{color}</code>
+            </div>
+            <div>
+              <code>
+                rgb({rgb!.r}, {rgb!.g}, {rgb!.b})
+              </code>
+            </div>
           </div>
-          <div>
-            <code>
-              rgb({rgb!.r}, {rgb!.g}, {rgb!.b})
-            </code>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   )
 }
