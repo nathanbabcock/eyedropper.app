@@ -31,14 +31,6 @@ function App() {
   // Random color on reload
   useEffect(() => setColor(randomColorHex()), [])
 
-  // Log mouse position
-  useEffect(() => {
-    const handler = (event: MouseEvent) =>
-      console.log(event.screenX, event.screenY)
-    window.addEventListener('mouseup', handler)
-    return () => window.removeEventListener('mouseup', handler)
-  })
-
   useEffect(() => {
     if (!color) return
     document.body.style.backgroundColor = color
