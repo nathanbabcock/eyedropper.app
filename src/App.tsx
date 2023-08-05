@@ -10,6 +10,7 @@ import {
   shouldShowOnLightBackground,
 } from './util/color-contrast'
 import { preferredColorScheme } from './util/prefers-color-scheme'
+import { randomColorHex } from './util/random-color'
 
 function logColor(color: string) {
   const consoleHasDarkBg = preferredColorScheme() === 'dark'
@@ -26,6 +27,9 @@ function App() {
   const [color, setColor] = useState<string>()
   const rgb = color ? hexToRgb(color) : undefined
   const [open, setOpen] = useState(false)
+
+  // Random color on reload
+  useEffect(() => setColor(randomColorHex()), [])
 
   useEffect(() => {
     if (!color) return
