@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { ReactComponent as EyedropperIcon } from './assets/eyedropper.svg'
 import { CopyButton } from './components/CopyButton'
+import { Footer } from './components/Footer'
 import {
   getPerceivedBrightness,
   shouldShowOnDarkBackground,
@@ -12,6 +13,7 @@ import {
 } from './util/color-contrast'
 import { hexToRgb, rgbToString } from './util/hex-to-rgb'
 import { preferredColorScheme } from './util/prefers-color-scheme'
+import { randomColorHex } from './util/random-color'
 
 function logColor(color: string) {
   const consoleHasDarkBg = preferredColorScheme() === 'dark'
@@ -36,11 +38,15 @@ function App() {
     if (hash) setHex(hash)
   }, [])
 
+  const pickRandomColor = () => {
+    const hex = randomColorHex()
+    setHex(hex)
+    updateUrl(hex)
+  }
+
   // Random color on reload (debug only)
   // useEffect(() => {
-  //   const hex = randomColorHex()
-  //   setHex(hex)
-  //   updateUrl(hex)
+  // pickRandomColor()
   // }, [])
 
   // Apply class to body
@@ -78,7 +84,7 @@ function App() {
 
   const updateUrl = (hex: string) => {
     history.pushState(null, '', hex)
-    document.title = hex
+    document.title = `${hex} - eyedropper.app`
   }
 
   useEffect(() => {
@@ -126,33 +132,41 @@ function App() {
       ))}
 
       <div className="foreground">
-        <button
-          onClick={pick}
-          style={{ borderRadius: '50%', padding: 50, width: 200, height: 200 }}
-        >
-          <EyedropperIcon />
-        </button>
-        {hex && rgb && (
-          <div
+        <main className="main">
+          <button
+            onClick={pick}
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1em',
-              margin: '1em',
+              borderRadius: '50%',
+              padding: 50,
+              width: 200,
+              height: 200,
             }}
           >
-            <CopyButton
-              children={hex}
-              copied={lastCopied === 'hex'}
-              onClick={() => copy(hex, 'hex')}
-            />
-            <CopyButton
-              children={rgb}
-              copied={lastCopied === 'rgb'}
-              onClick={() => copy(rgb, 'rgb')}
-            />
-          </div>
-        )}
+            <EyedropperIcon />
+          </button>
+          {hex && rgb && (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1em',
+                margin: '1em',
+              }}
+            >
+              <CopyButton
+                children={hex}
+                copied={lastCopied === 'hex'}
+                onClick={() => copy(hex, 'hex')}
+              />
+              <CopyButton
+                children={rgb}
+                copied={lastCopied === 'rgb'}
+                onClick={() => copy(rgb, 'rgb')}
+              />
+            </div>
+          )}
+        </main>
+        <Footer onRandomColorClick={pickRandomColor} />
       </div>
     </>
   )

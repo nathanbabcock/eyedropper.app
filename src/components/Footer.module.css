@@ -1,0 +1,18 @@
+.Footer {
+  padding: 1em;
+}
+
+.Footer a {
+  opacity: 50%;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.Footer a:hover,
+.Footer a:focus {
+  opacity: 75%;
+}
+
+.separator {
+  opacity: 50%;
+  margin: 0 0.5em;
+}
