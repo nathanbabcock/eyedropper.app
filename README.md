@@ -72,3 +72,4 @@ pnpm deploy-prod
   - [ ] Support `prefers-reduced-motion`
   - [ ] Show color names (HTML/pantone/brand) when applicable
   - [ ] ~~Auto open color picker on page load (optional setting)~~
+  - [ ] Improve Lighthouse scores (`<meta>` description, cache policy, ...)
