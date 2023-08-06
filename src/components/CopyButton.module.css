@@ -2,6 +2,7 @@
   --capsule: 99999px;
   --padding: 0.5em;
 
+  margin-left: calc(1em + var(--padding));
   color: inherit;
   border-radius: var(--capsule);
   background-color: rgba(0, 0, 0, 0%);
