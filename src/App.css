@@ -42,4 +42,9 @@
   align-items: center;
   flex-grow: 1;
   gap: 1em;
+  font-size: 2em;
+}
+
+.main a {
+  text-decoration: underline;
 }

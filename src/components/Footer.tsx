@@ -2,6 +2,7 @@ import { AiFillGithub } from 'react-icons/ai'
 import { BiLinkExternal } from 'react-icons/bi'
 import { FaShuffle } from 'react-icons/fa6'
 import { repository } from '../../package.json'
+import { caniuse } from '../config/caniuse'
 import { separatorChar } from '../util/separator'
 import styles from './Footer.module.css'
 
@@ -23,7 +24,7 @@ export function Footer({ onRandomColorClick }: FooterProps) {
         <AiFillGithub /> Github
       </a>
       {separator}
-      <a href="https://caniuse.com/mdn-api_eyedropper" target="blank">
+      <a href={caniuse} target="blank">
         Browser Support <BiLinkExternal />
       </a>
       {separator}

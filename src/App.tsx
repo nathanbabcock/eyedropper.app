@@ -6,6 +6,7 @@ import './App.css'
 import { ReactComponent as EyedropperIcon } from './assets/eyedropper.svg'
 import { CopyButton } from './components/CopyButton'
 import { Footer } from './components/Footer'
+import { Unsupported } from './components/Unsupported'
 import {
   getPerceivedBrightness,
   shouldShowOnDarkBackground,
@@ -28,10 +29,11 @@ function logColor(color: string) {
 }
 
 function App() {
-  const [open, setOpen] = useState(false)
+  const [_, setOpen] = useState(false)
   const [animations, setAnimations] = useState<string[]>([])
   const [hex, setHex] = useState<string>()
   const rgb = hex ? rgbToString(hexToRgb(hex)) : undefined
+  const unsupported = window.EyeDropper === undefined
 
   // Read URL fragment on load
   useEffect(() => {
@@ -44,11 +46,6 @@ function App() {
     setHex(hex)
     updateUrl(hex)
   }
-
-  // Random color on reload (debug only)
-  // useEffect(() => {
-  // pickRandomColor()
-  // }, [])
 
   // Apply class to body
   useEffect(() => {
@@ -142,10 +139,13 @@ function App() {
               width: 200,
               height: 200,
               color: 'white',
+              cursor: unsupported ? 'not-allowed' : undefined,
             }}
+            disabled={unsupported}
           >
             <EyedropperIcon />
           </button>
+          {unsupported && <Unsupported />}
           {hex && (
             <CopyButton
               children={hex}
