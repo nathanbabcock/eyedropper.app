@@ -9,7 +9,12 @@
   - [x] ...and on click of each color
 - [ ] Error screen for unsupported browsers
 - [ ] Remember last color and preferred color format
-- [ ] Update url & browser history on color change
+- [x] Update url & browser history on color change
+- [ ] Footer actions
+  - [ ] Random color
+  - [ ] Github
+  - [ ] (?) Browser support
+  - [ ] (?) API docs
 - Ideas
   - [x] An expanding circular animation when a new color is picked
   - [ ] ~~Auto open color picker on page load (optional setting)~~
