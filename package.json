@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "description": "Pick colors from the screen in Chromium browsers.",
   "repository": {
     "type": "git",
     "url": "https://github.com/nathanbabcock/eyedropper.app.git"
