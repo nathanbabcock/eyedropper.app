@@ -8,7 +8,7 @@ import {
   shouldShowOnDarkBackground,
   shouldShowOnLightBackground,
 } from './util/color-contrast'
-import { hexToRgb } from './util/hex-to-rgb'
+import { hexToRgb, rgbToString } from './util/hex-to-rgb'
 import { preferredColorScheme } from './util/prefers-color-scheme'
 import { randomColorHex } from './util/random-color'
 
@@ -24,32 +24,34 @@ function logColor(color: string) {
 }
 
 function App() {
-  const [color, setColor] = useState<string>()
-  const rgb = color ? hexToRgb(color) : undefined
+  const [hex, setHex] = useState<string>()
+  const rgb = hex ? rgbToString(hexToRgb(hex)) : undefined
   const [open, setOpen] = useState(false)
 
   const [animations, setAnimations] = useState<string[]>([])
 
   // Random color on reload (debug only)
-  useEffect(() => setColor(randomColorHex()), [])
+  useEffect(() => setHex(randomColorHex()), [])
 
   const animationTime = 2000 // todo: must match CSS animation duration
-  const playAnimation = (color: string) => {
-    if (document.body.style.backgroundColor === color) return
+  const playAnimation = (hex: string) => {
+    const rgb = rgbToString(hexToRgb(hex))
+    console.log({ hex, rgb, body: document.body.style.backgroundColor })
+    if ([hex, rgb].includes(document.body.style.backgroundColor)) return
     setAnimations(animations =>
-      animations.includes(color) ? animations : [...animations, color]
+      animations.includes(hex) ? animations : [...animations, hex]
     )
     setTimeout(() => {
-      setAnimations(animations => animations.filter(c => c !== color))
-      document.body.style.backgroundColor = color
+      setAnimations(animations => animations.filter(c => c !== hex))
+      document.body.style.backgroundColor = hex
     }, animationTime)
   }
 
   useEffect(() => {
-    if (!color) return
-    logColor(color)
-    playAnimation(color)
-  }, [color])
+    if (!hex) return
+    logColor(hex)
+    playAnimation(hex)
+  }, [hex])
 
   async function pick() {
     try {
@@ -58,9 +60,9 @@ function App() {
       const dropper = new window.EyeDropper()
       setOpen(true)
       const color = await dropper.open()
-      setColor(color?.sRGBHex)
+      setHex(color?.sRGBHex)
     } catch (e) {
-      console.error(e)
+      console.log(chalk.italic(chalk.gray('User cancelled selection')))
     } finally {
       setOpen(false)
     }
@@ -83,15 +85,13 @@ function App() {
         >
           <EyedropperIcon />
         </button>
-        {color && (
+        {hex && (
           <div>
             <div>
-              <code>{color}</code>
+              <code>{hex}</code>
             </div>
             <div>
-              <code>
-                rgb({rgb!.r}, {rgb!.g}, {rgb!.b})
-              </code>
+              <code>{rgb}</code>
             </div>
           </div>
         )}
