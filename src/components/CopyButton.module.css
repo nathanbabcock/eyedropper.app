@@ -23,7 +23,9 @@
   padding: var(--padding);
 }
 
-.CopyButton:hover svg {
+.CopyButton:hover svg,
+.CopyButton:focus svg,
+.CopyButton.hover svg {
   opacity: 1;
 }
 
