@@ -11,11 +11,11 @@
   - [x] Adjust text color based on background color
   - [ ] Error screen for unsupported browsers
   - [x] Update url & browser history on color change
-  - [ ] Footer actions
-    - [ ] Random color
-    - [ ] Github link
-    - [ ] (?) Browser support
-    - [ ] (?) API docs
+  - [x] Footer actions
+    - [x] Random color
+    - [x] Github link
+    - [x] (?) Browser support
+    - [x] (?) API docs
   - [ ] Deploy to S3
 - Extra
   - [x] An expanding circular animation when a new color is picked

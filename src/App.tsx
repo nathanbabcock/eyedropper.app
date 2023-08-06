@@ -141,6 +141,7 @@ function App() {
               padding: 50,
               width: 200,
               height: 200,
+              color: 'white',
             }}
           >
             <EyedropperIcon />
