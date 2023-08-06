@@ -1,3 +1,6 @@
+import { AiFillGithub } from 'react-icons/ai'
+import { BiLinkExternal } from 'react-icons/bi'
+import { FaShuffle } from 'react-icons/fa6'
 import { repository } from '../../package.json'
 import styles from './Footer.module.css'
 
@@ -12,22 +15,22 @@ export function Footer({ onRandomColorClick }: FooterProps) {
   return (
     <footer className={styles.Footer}>
       <a href="javascript:void(0)" onClick={onRandomColorClick}>
-        Random Color
+        <FaShuffle /> Random Color
       </a>
       {separator}
       <a href={repo} target="blank">
-        Github
+        <AiFillGithub /> Github
       </a>
       {separator}
       <a href="https://caniuse.com/mdn-api_eyedropper" target="blank">
-        Browser Support
+        Browser Support <BiLinkExternal />
       </a>
       {separator}
       <a
         href="https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper"
         target="blank"
       >
-        API Docs
+        API Docs <BiLinkExternal />
       </a>
     </footer>
   )
