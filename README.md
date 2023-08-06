@@ -7,10 +7,13 @@
 - [ ] Copy color to clipboard
   - [ ] Automatically on click
   - [ ] ...and on click of each color
+- [ ] Error screen for unsupported browsers
 - [ ] Remember last color and preferred color format
 - Ideas
   - [ ] An expanding circular animation when a new color is picked
   - [ ] ~~Auto open color picker on page load (optional setting)~~
+  - [ ] Show color names (HTML/pantone/brand) when applicable
+  - [ ] Pageload animation
 
 ## EyeDropper Web API
 

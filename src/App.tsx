@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { ReactComponent as EyedropperIcon } from './assets/eyedropper.svg'
 import {
-  hexToRgb,
   shouldShowOnDarkBackground,
   shouldShowOnLightBackground,
 } from './util/color-contrast'
+import { hexToRgb } from './util/hex-to-rgb'
 import { preferredColorScheme } from './util/prefers-color-scheme'
 import { randomColorHex } from './util/random-color'
 
@@ -28,13 +28,27 @@ function App() {
   const rgb = color ? hexToRgb(color) : undefined
   const [open, setOpen] = useState(false)
 
-  // Random color on reload
+  const [animations, setAnimations] = useState<string[]>([])
+
+  // Random color on reload (debug only)
   useEffect(() => setColor(randomColorHex()), [])
+
+  const animationTime = 2000 // todo: must match CSS animation duration
+  const playAnimation = (color: string) => {
+    if (document.body.style.backgroundColor === color) return
+    setAnimations(animations =>
+      animations.includes(color) ? animations : [...animations, color]
+    )
+    setTimeout(() => {
+      setAnimations(animations => animations.filter(c => c !== color))
+      document.body.style.backgroundColor = color
+    }, animationTime)
+  }
 
   useEffect(() => {
     if (!color) return
-    // document.body.style.backgroundColor = color
     logColor(color)
+    playAnimation(color)
   }, [color])
 
   async function pick() {
@@ -54,7 +68,14 @@ function App() {
 
   return (
     <>
-      <div className="animatedCircle" style={{ backgroundColor: color }} />
+      {animations.map(backgroundColor => (
+        <div
+          key={backgroundColor}
+          className="animatedCircle"
+          style={{ backgroundColor }}
+        />
+      ))}
+
       <div className="foreground">
         <button
           onClick={pick}
