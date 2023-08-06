@@ -15,9 +15,9 @@ export function Footer({ onRandomColorClick }: FooterProps) {
 
   return (
     <footer className={styles.Footer}>
-      <a href="javascript:void(0)" onClick={onRandomColorClick}>
+      <button className="link" onClick={onRandomColorClick}>
         <FaShuffle /> Random Color
-      </a>
+      </button>
       {separator}
       <a href={repo} target="blank">
         <AiFillGithub /> Github

@@ -6,7 +6,8 @@
   padding: 1em;
 }
 
-.Footer a {
+.Footer a,
+.Footer :global(.link) {
   opacity: 50%;
   transition: opacity 0.2s ease-in-out;
   display: inline-flex;
@@ -16,7 +17,9 @@
 }
 
 .Footer a:hover,
-.Footer a:focus {
+.Footer a:focus,
+.Footer :global(.link):hover,
+.Footer :global(.link):focus {
   opacity: 75%;
 }
 
