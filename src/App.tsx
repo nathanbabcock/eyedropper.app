@@ -53,6 +53,12 @@ function App() {
     playAnimation(hex)
   }, [hex])
 
+  const [lastCopied, setLastCopied] = useState<'hex' | 'rgb'>()
+  const copy = (text: string, type: 'hex' | 'rgb') => {
+    navigator.clipboard.writeText(text).catch(console.error)
+    setLastCopied(type)
+  }
+
   async function pick() {
     try {
       if (!window.EyeDropper)
@@ -60,18 +66,15 @@ function App() {
       const dropper = new window.EyeDropper()
       setOpen(true)
       const color = await dropper.open()
-      setHex(color?.sRGBHex)
+      setHex(color.sRGBHex)
+      if (lastCopied === 'rgb')
+        copy(rgbToString(hexToRgb(color.sRGBHex)), 'rgb')
+      else copy(color.sRGBHex, 'hex')
     } catch (e) {
       console.log(chalk.italic(chalk.gray('User cancelled selection')))
     } finally {
       setOpen(false)
     }
-  }
-
-  const [lastCopied, setLastCopied] = useState<'hex' | 'rgb'>()
-  const copy = (text: string, type: 'hex' | 'rgb') => {
-    navigator.clipboard.writeText(text).catch(console.error)
-    setLastCopied(type)
   }
 
   return (
