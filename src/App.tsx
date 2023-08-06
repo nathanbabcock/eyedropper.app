@@ -6,6 +6,7 @@ import './App.css'
 import { ReactComponent as EyedropperIcon } from './assets/eyedropper.svg'
 import { CopyButton } from './components/CopyButton'
 import {
+  getPerceivedBrightness,
   shouldShowOnDarkBackground,
   shouldShowOnLightBackground,
 } from './util/color-contrast'
@@ -25,11 +26,10 @@ function logColor(color: string) {
 }
 
 function App() {
+  const [open, setOpen] = useState(false)
+  const [animations, setAnimations] = useState<string[]>([])
   const [hex, setHex] = useState<string>()
   const rgb = hex ? rgbToString(hexToRgb(hex)) : undefined
-  const [open, setOpen] = useState(false)
-
-  const [animations, setAnimations] = useState<string[]>([])
 
   // Read URL fragment on load
   useEffect(() => {
@@ -43,6 +43,20 @@ function App() {
     setHex(hex)
     updateUrl(hex)
   }, [])
+
+  // Apply class to body
+  useEffect(() => {
+    if (!hex) return
+    const brightness = getPerceivedBrightness(hexToRgb(hex))
+    console.log({ brightness })
+    if (brightness > 128) {
+      document.body.classList.add('bg-light')
+      document.body.classList.remove('bg-dark')
+    } else {
+      document.body.classList.add('bg-dark')
+      document.body.classList.remove('bg-light')
+    }
+  }, [hex])
 
   const animationTime = 2000 // todo: must match CSS animation duration
   const playAnimation = (hex: string) => {

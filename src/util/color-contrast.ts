@@ -1,6 +1,6 @@
 import { hexToRgb } from './hex-to-rgb'
 
-function getPerceivedBrightness(rgb: {
+export function getPerceivedBrightness(rgb: {
   r: number
   g: number
   b: number

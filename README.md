@@ -1,6 +1,6 @@
 # Eyedropper.app 💧
 
-> Pick colors from anywhere on your screen in Chromium-based browsers.
+> Pick colors from the screen in Chromium-based browsers.
 
 ## TODO
 
@@ -8,6 +8,7 @@
   - [x] Copy color to clipboard
     - [x] Automatically on click
     - [x] ...and on click of each color
+  - [x] Adjust text color based on background color
   - [ ] Error screen for unsupported browsers
   - [x] Update url & browser history on color change
   - [ ] Footer actions
@@ -20,6 +21,7 @@
   - [x] An expanding circular animation when a new color is picked
   - [x] Pageload animation
   - [ ] Typography
+  - [ ] Entrance animation for all elements
   - [ ] Remember last color and preferred color format
   - [ ] Hover/active animations for main button icon
   - [ ] Update favicon SVG with selected color (?)
