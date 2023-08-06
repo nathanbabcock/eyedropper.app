@@ -1,6 +1,6 @@
 .CopyButton {
   --capsule: 99999px;
-  --padding: 1em;
+  --padding: 0.5em;
 
   color: inherit;
   border-radius: var(--capsule);
@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-size: 2em;
 }
 
 .CopyButton:hover,
@@ -21,7 +22,7 @@
 .CopyButton svg {
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
-  padding: var(--padding);
+  padding: var(--padding) var(--padding) var(--padding) 0;
 }
 
 .CopyButton:hover svg,
@@ -33,12 +34,10 @@
 .text {
   padding: var(--padding);
   display: inline-block;
-  width: 18ch; /* enough space for rgb(255, 255, 255) */
   user-select: text;
 }
 
 .action {
-  width: calc(6ch + calc(2 * var(--padding)));
   display: flex;
   justify-content: flex-end;
 }

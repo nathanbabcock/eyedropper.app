@@ -144,26 +144,19 @@ function App() {
           >
             <EyedropperIcon />
           </button>
-          {hex && rgb && (
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1em',
-                margin: '1em',
-              }}
-            >
-              <CopyButton
-                children={hex}
-                copied={lastCopied === 'hex'}
-                onClick={() => copy(hex, 'hex')}
-              />
-              <CopyButton
-                children={rgb}
-                copied={lastCopied === 'rgb'}
-                onClick={() => copy(rgb, 'rgb')}
-              />
-            </div>
+          {hex && (
+            <CopyButton
+              children={hex}
+              copied={lastCopied === 'hex'}
+              onClick={() => copy(hex, 'hex')}
+            />
+          )}
+          {rgb && (
+            <CopyButton
+              children={rgb}
+              copied={lastCopied === 'rgb'}
+              onClick={() => copy(rgb, 'rgb')}
+            />
           )}
         </main>
         <Footer onRandomColorClick={pickRandomColor} />
