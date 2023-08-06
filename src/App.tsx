@@ -4,6 +4,7 @@ import chalk from 'chalk'
 import { useEffect, useState } from 'react'
 import './App.css'
 import { ReactComponent as EyedropperIcon } from './assets/eyedropper.svg'
+import { CopyButton } from './components/CopyButton'
 import {
   shouldShowOnDarkBackground,
   shouldShowOnLightBackground,
@@ -36,7 +37,6 @@ function App() {
   const animationTime = 2000 // todo: must match CSS animation duration
   const playAnimation = (hex: string) => {
     const rgb = rgbToString(hexToRgb(hex))
-    console.log({ hex, rgb, body: document.body.style.backgroundColor })
     if ([hex, rgb].includes(document.body.style.backgroundColor)) return
     setAnimations(animations =>
       animations.includes(hex) ? animations : [...animations, hex]
@@ -68,6 +68,12 @@ function App() {
     }
   }
 
+  const [lastCopied, setLastCopied] = useState<'hex' | 'rgb'>()
+  const copy = (text: string, type: 'hex' | 'rgb') => {
+    navigator.clipboard.writeText(text).catch(console.error)
+    setLastCopied(type)
+  }
+
   return (
     <>
       {animations.map(backgroundColor => (
@@ -85,14 +91,25 @@ function App() {
         >
           <EyedropperIcon />
         </button>
-        {hex && (
-          <div>
-            <div>
-              <code>{hex}</code>
-            </div>
-            <div>
-              <code>{rgb}</code>
-            </div>
+        {hex && rgb && (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1em',
+              margin: '1em',
+            }}
+          >
+            <CopyButton
+              children={hex}
+              copied={lastCopied === 'hex'}
+              onClick={() => copy(hex, 'hex')}
+            />
+            <CopyButton
+              children={rgb}
+              copied={lastCopied === 'rgb'}
+              onClick={() => copy(rgb, 'rgb')}
+            />
           </div>
         )}
       </div>

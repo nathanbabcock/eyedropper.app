@@ -1,0 +1,47 @@
+.CopyButton {
+  --capsule: 99999px;
+  --padding: 1em;
+
+  border-radius: var(--capsule);
+  background-color: rgba(0, 0, 0, 0%);
+  transition: background-color 0.2s ease-in-out;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.CopyButton:hover,
+.CopyButton:focus,
+.CopyButton.hover {
+  background-color: rgba(0, 0, 0, 25%);
+}
+
+.CopyButton svg {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.CopyButton:hover svg {
+  opacity: 1;
+  padding: var(--padding);
+}
+
+.text {
+  padding: var(--padding);
+  display: inline-block;
+  width: 18ch; /* enough space for rgb(255, 255, 255) */
+}
+
+.action {
+  width: calc(6ch + calc(2 * var(--padding)));
+  display: flex;
+  justify-content: flex-end;
+}
+
+.copied {
+  border-radius: var(--capsule);
+  background-color: rgba(0, 0, 0, 25%);
+  padding: var(--padding);
+  display: block;
+}
