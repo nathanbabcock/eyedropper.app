@@ -22,11 +22,13 @@
   - [x] Pageload animation
   - [ ] Typography
   - [ ] Entrance animation for all elements
+  - [ ] Calculate custom color variants based on selected color
   - [ ] Remember last color and preferred color format
   - [ ] Hover/active animations for main button icon
   - [ ] Update favicon SVG with selected color (?)
     - [ ] Custom SVG eyedropper
   - [ ] Responsive layout
+  - [ ] Typewriter animation for hex/rgb values
   - [ ] `<noscript>` error page
   - [ ] Support `prefers-reduced-motion`
   - [ ] Show color names (HTML/pantone/brand) when applicable
