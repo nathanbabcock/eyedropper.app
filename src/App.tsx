@@ -32,12 +32,16 @@ function App() {
   const [animations, setAnimations] = useState<string[]>([])
 
   // Random color on reload (debug only)
-  useEffect(() => setHex(randomColorHex()), [])
+  useEffect(() => {
+    const hex = randomColorHex()
+    setHex(hex)
+    updateUrl(hex)
+  }, [])
 
   const animationTime = 2000 // todo: must match CSS animation duration
   const playAnimation = (hex: string) => {
-    const rgb = rgbToString(hexToRgb(hex))
-    if ([hex, rgb].includes(document.body.style.backgroundColor)) return
+    // const rgb = rgbToString(hexToRgb(hex))
+    // if ([hex, rgb].includes(document.body.style.backgroundColor)) return
     setAnimations(animations =>
       animations.includes(hex) ? animations : [...animations, hex]
     )
@@ -53,6 +57,21 @@ function App() {
     playAnimation(hex)
   }, [hex])
 
+  const updateUrl = (hex: string) => {
+    history.pushState(null, '', hex)
+    document.title = hex
+  }
+
+  useEffect(() => {
+    const handler = (_event: PopStateEvent) => {
+      console.log('popstate', location.hash)
+      setHex(location.hash)
+    }
+    // Listen for the "popstate" event to handle back and forward button clicks
+    window.addEventListener('popstate', handler)
+    return () => window.removeEventListener('popstate', handler)
+  })
+
   const [lastCopied, setLastCopied] = useState<'hex' | 'rgb'>()
   const copy = (text: string, type: 'hex' | 'rgb') => {
     navigator.clipboard.writeText(text).catch(console.error)
@@ -65,11 +84,11 @@ function App() {
         throw new Error('EyeDropper not supported in this browser')
       const dropper = new window.EyeDropper()
       setOpen(true)
-      const color = await dropper.open()
-      setHex(color.sRGBHex)
-      if (lastCopied === 'rgb')
-        copy(rgbToString(hexToRgb(color.sRGBHex)), 'rgb')
-      else copy(color.sRGBHex, 'hex')
+      const { sRGBHex: hex } = await dropper.open()
+      setHex(hex)
+      updateUrl(hex)
+      if (lastCopied === 'rgb') copy(rgbToString(hexToRgb(hex)), 'rgb')
+      else copy(hex, 'hex')
     } catch (e) {
       console.log(chalk.italic(chalk.gray('User cancelled selection')))
     } finally {
