@@ -2,6 +2,13 @@
 
 <https://eyedropper.app>
 
+## Features ✨
+
+- 🎨 Screen color picker
+- 💯% conveniently web-based; no extension or download required
+- 📋 Copy to clipboard automatically
+- 🤗 Open source
+
 ## EyeDropper Web API
 
 [Browser support: caniuse.com](https://caniuse.com/mdn-api_eyedropper)
@@ -10,21 +17,45 @@
 
 [source: MDN](https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper_API#security_and_privacy_measures)
 
+## Deployment
+
+```bash
+pnpm install
+pnpm build
+pnpm deploy-prod
+```
+
+**Environment**: Static site on AWS S3 with CloudFront CDN.
+
+**Initial setup:**
+[docs](https://github.com/nathanbabcock/nbabcock-toolkit/blob/master/docs/s3-static-site.md)
+
+### Prerequisites
+
+- Install [AWS CLI](https://aws.amazon.com/cli/)
+- Add AWS credentials to [`.env`](/.env) (see [`.env.example`](/.env.example))
+
+### Troubleshooting
+
+- Needed to manually set the `Content-Type` of `.js` files for some reason.
+
 ## TODO 📋
 
-- MVP
+> 📣 PRs Welcome! 📣
+
+- [x] MVP
   - [x] Copy color to clipboard
     - [x] Automatically on click
     - [x] ...and on click of each color
   - [x] Adjust text color based on background color
-  - [ ] Error screen for unsupported browsers
+  - [x] Error screen for unsupported browsers
   - [x] Update url & browser history on color change
   - [x] Footer actions
     - [x] Random color
     - [x] Github link
     - [x] (?) Browser support
     - [x] (?) API docs
-  - [ ] Deploy to S3
+  - [x] Deploy to S3
 - Extra
   - [x] An expanding circular animation when a new color is picked
   - [x] Pageload animation
@@ -41,4 +72,3 @@
   - [ ] Support `prefers-reduced-motion`
   - [ ] Show color names (HTML/pantone/brand) when applicable
   - [ ] ~~Auto open color picker on page load (optional setting)~~
-
