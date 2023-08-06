@@ -20,11 +20,11 @@
 .CopyButton svg {
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
+  padding: var(--padding);
 }
 
 .CopyButton:hover svg {
   opacity: 1;
-  padding: var(--padding);
 }
 
 .text {

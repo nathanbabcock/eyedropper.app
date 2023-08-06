@@ -11,6 +11,7 @@ import {
 } from './util/color-contrast'
 import { hexToRgb, rgbToString } from './util/hex-to-rgb'
 import { preferredColorScheme } from './util/prefers-color-scheme'
+import { randomColorHex } from './util/random-color'
 
 function logColor(color: string) {
   const consoleHasDarkBg = preferredColorScheme() === 'dark'
@@ -37,11 +38,11 @@ function App() {
   }, [])
 
   // Random color on reload (debug only)
-  // useEffect(() => {
-  //   const hex = randomColorHex()
-  //   setHex(hex)
-  //   updateUrl(hex)
-  // }, [])
+  useEffect(() => {
+    const hex = randomColorHex()
+    setHex(hex)
+    updateUrl(hex)
+  }, [])
 
   const animationTime = 2000 // todo: must match CSS animation duration
   const playAnimation = (hex: string) => {
