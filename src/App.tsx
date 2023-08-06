@@ -14,6 +14,7 @@ import {
 import { hexToRgb, rgbToString } from './util/hex-to-rgb'
 import { preferredColorScheme } from './util/prefers-color-scheme'
 import { randomColorHex } from './util/random-color'
+import { separatorChar } from './util/separator'
 
 function logColor(color: string) {
   const consoleHasDarkBg = preferredColorScheme() === 'dark'
@@ -84,7 +85,7 @@ function App() {
 
   const updateUrl = (hex: string) => {
     history.pushState(null, '', hex)
-    document.title = `${hex} - eyedropper.app`
+    document.title = `${hex} ${separatorChar} eyedropper.app`
   }
 
   useEffect(() => {
