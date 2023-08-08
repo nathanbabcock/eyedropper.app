@@ -57,9 +57,11 @@ pnpm deploy-prod
     - [x] (?) API docs
   - [x] Deploy to S3
 - Extra
+  - [ ] Typography
+  - [ ] SEO
+  - [ ] Mac/Linux bug: <https://github.com/WICG/eyedropper-api/issues/31>
   - [x] An expanding circular animation when a new color is picked
   - [x] Pageload animation
-  - [ ] Typography
   - [ ] Entrance animation for all elements
   - [ ] Calculate custom color variants based on selected color
   - [ ] Remember last color and preferred color format
