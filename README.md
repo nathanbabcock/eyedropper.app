@@ -57,12 +57,14 @@ pnpm deploy-prod
     - [x] (?) API docs
   - [x] Deploy to S3
 - Extra
-  - [ ] Typography
   - [ ] SEO
+  - [ ] Improve Lighthouse scores (`<meta>` description, cache policy, ...)
   - [ ] Mac/Linux bug: <https://github.com/WICG/eyedropper-api/issues/31>
-  - [x] An expanding circular animation when a new color is picked
-  - [x] Pageload animation
+  - [ ] Improve favicon
   - [ ] Entrance animation for all elements
+  - ---
+  - [ ] Typography
+  - [x] An expanding circular animation when a new color is picked
   - [ ] Calculate custom color variants based on selected color
   - [ ] Remember last color and preferred color format
   - [ ] Hover/active animations for main button icon
@@ -74,4 +76,3 @@ pnpm deploy-prod
   - [ ] Support `prefers-reduced-motion`
   - [ ] Show color names (HTML/pantone/brand) when applicable
   - [ ] ~~Auto open color picker on page load (optional setting)~~
-  - [ ] Improve Lighthouse scores (`<meta>` description, cache policy, ...)
