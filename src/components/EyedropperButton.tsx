@@ -17,6 +17,7 @@ export function EyedropperButton({ isOpen, ...props }: EyedropperButtonProps) {
         cursor: props.disabled ? 'not-allowed' : undefined,
       }}
       children={<EyedropperIcon />}
+      aria-label="eyedropper"
       {...props}
     />
   )
