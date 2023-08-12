@@ -9,6 +9,7 @@
   height: 200px;
   color: white;
   transition: transform 0.4s var(--ease-out-quint);
+  margin-bottom: 1em;
 }
 
 .EyedropperButton:hover,
