@@ -68,7 +68,7 @@ pnpm deploy-prod
 - [ ] Entrance animation for all elements
 - [ ] Hover/active animations for main button icon
 
-### Extra Features
+### Extra Features ✨
 
 - [ ] Remember last color and preferred color format in `localStorage`
 - [ ] Accept any color format in URL fragment

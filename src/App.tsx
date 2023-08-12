@@ -15,6 +15,7 @@ import {
 import { hexToRgb, rgbToString } from './util/hex-to-rgb'
 import { preferredColorScheme } from './util/prefers-color-scheme'
 import { randomColorHex } from './util/random-color'
+import { rgbToHex } from './util/rgb-to-hex'
 import { separatorChar } from './util/separator'
 
 function logColor(color: string) {
@@ -38,11 +39,11 @@ function App() {
   // Read URL fragment on load
   useEffect(() => {
     const hash = location.hash
-    if (hash) setHex(hash)
+    if (hash) setHex(hash.toUpperCase())
   }, [])
 
   const pickRandomColor = () => {
-    const hex = randomColorHex()
+    const hex = randomColorHex().toUpperCase()
     setHex(hex)
     updateUrl(hex)
   }
@@ -81,8 +82,8 @@ function App() {
   }, [hex])
 
   const updateUrl = (hex: string) => {
-    history.pushState(null, '', hex)
-    document.title = `${hex} ${separatorChar} eyedropper.app`
+    history.pushState(null, '', hex.toUpperCase())
+    document.title = `${hex.toUpperCase()} ${separatorChar} eyedropper.app`
   }
 
   useEffect(() => {
@@ -107,7 +108,13 @@ function App() {
         throw new Error('EyeDropper not supported in this browser')
       const dropper = new window.EyeDropper()
       setOpen(true)
-      const { sRGBHex: hex } = await dropper.open()
+      const { sRGBHex } = await dropper.open()
+      if (!sRGBHex) return
+      let hex: string
+      // 🪲 handle bug where some browsers return RGBA instead of hex
+      // <https://github.com/WICG/eyedropper-api/issues/31>
+      if (sRGBHex.startsWith('rgb')) hex = rgbToHex(sRGBHex).toUpperCase()
+      else hex = sRGBHex.toUpperCase()
       setHex(hex)
       updateUrl(hex)
       if (lastCopied === 'rgb') copy(rgbToString(hexToRgb(hex)), 'rgb')
