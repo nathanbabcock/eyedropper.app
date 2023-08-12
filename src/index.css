@@ -76,7 +76,7 @@ button {
   color: var(--light);
 }
 button:hover {
-  border-color: #646cff;
+  border-color: white;
 }
 button:focus,
 button:focus-visible {
