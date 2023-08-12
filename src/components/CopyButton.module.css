@@ -1,8 +1,6 @@
 .CopyButton {
   --capsule: 99999px;
   --padding: 0.5em;
-
-  margin-left: calc(1em + var(--padding));
   color: inherit;
   border-radius: var(--capsule);
   background-color: rgba(0, 0, 0, 0%);
@@ -21,6 +19,7 @@
 
 .CopyButton svg {
   opacity: 0;
+  display: none;
   transition: opacity 0.2s ease-in-out;
   padding: var(--padding) var(--padding) var(--padding) 0;
 }
@@ -28,6 +27,7 @@
 .CopyButton:hover svg,
 .CopyButton:focus svg,
 .CopyButton.hover svg {
+  display: block;
   opacity: 1;
 }
 

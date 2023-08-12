@@ -60,7 +60,7 @@ pnpm deploy-prod
   - [ ] SEO
   - [ ] Improve Lighthouse scores (`<meta>` description, cache policy, ...)
   - [ ] Mac/Linux bug: <https://github.com/WICG/eyedropper-api/issues/31>
-  - [ ] Improve favicon
+  - [x] Improve favicon
   - [ ] Entrance animation for all elements
   - ---
   - [ ] Typography
