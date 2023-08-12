@@ -30,7 +30,7 @@ function logColor(color: string) {
 }
 
 function App() {
-  const [_, setOpen] = useState(false)
+  const [open, setOpen] = useState(false)
   const [animations, setAnimations] = useState<string[]>([])
   const [hex, setHex] = useState<string>()
   const rgb = hex ? rgbToString(hexToRgb(hex)) : undefined
@@ -138,7 +138,11 @@ function App() {
 
       <div className="foreground">
         <main className="main">
-          <EyedropperButton onClick={pick} disabled={unsupported} />
+          <EyedropperButton
+            onClick={pick}
+            disabled={unsupported}
+            isOpen={open}
+          />
           {unsupported && <Unsupported />}
           {hex && (
             <CopyButton
