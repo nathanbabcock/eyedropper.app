@@ -38,8 +38,10 @@ function App() {
 
   // Read URL fragment on load
   useEffect(() => {
-    const hash = location.hash
-    if (hash) setHex(hash.toUpperCase())
+    const hash = location.hash?.toUpperCase()
+    if (!hash) return
+    setHex(hash)
+    updateTitle(hash)
   }, [])
 
   const pickRandomColor = () => {
@@ -81,10 +83,11 @@ function App() {
     playAnimation(hex)
   }, [hex])
 
-  const updateUrl = (hex: string) => {
+  const updateTitle = (hex: string) =>
+    (document.title = `${hex.toUpperCase()} ${separatorChar} eyedropper.app`)
+
+  const updateUrl = (hex: string) =>
     history.pushState(null, '', hex.toUpperCase())
-    document.title = `${hex.toUpperCase()} ${separatorChar} eyedropper.app`
-  }
 
   useEffect(() => {
     const handler = (_event: PopStateEvent) => {
@@ -117,6 +120,7 @@ function App() {
       else hex = sRGBHex.toUpperCase()
       setHex(hex)
       updateUrl(hex)
+      updateTitle(hex)
       if (lastCopied === 'rgb') copy(rgbToString(hexToRgb(hex)), 'rgb')
       else copy(hex, 'hex')
     } catch (e) {

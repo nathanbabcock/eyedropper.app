@@ -65,8 +65,8 @@ pnpm deploy-prod
 - [x] Mac/Linux bug: <https://github.com/WICG/eyedropper-api/issues/31>
 - [x] Improve favicon
 - [x] Typography
-- [ ] Entrance animation for all elements
-- [ ] Hover/active animations for main button icon
+- [x] Entrance animation for all elements
+- [x] Hover/active animations for main button icon
 
 ### Extra Features ✨
 
