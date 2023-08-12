@@ -3,8 +3,8 @@
 import chalk from 'chalk'
 import { useEffect, useState } from 'react'
 import './App.css'
-import { ReactComponent as EyedropperIcon } from './assets/eyedropper.svg'
 import { CopyButton } from './components/CopyButton'
+import { EyedropperButton } from './components/EyedropperButton'
 import { Footer } from './components/Footer'
 import { Unsupported } from './components/Unsupported'
 import {
@@ -138,20 +138,7 @@ function App() {
 
       <div className="foreground">
         <main className="main">
-          <button
-            onClick={pick}
-            style={{
-              borderRadius: '50%',
-              padding: 50,
-              width: 200,
-              height: 200,
-              color: 'white',
-              cursor: unsupported ? 'not-allowed' : undefined,
-            }}
-            disabled={unsupported}
-          >
-            <EyedropperIcon />
-          </button>
+          <EyedropperButton onClick={pick} disabled={unsupported} />
           {unsupported && <Unsupported />}
           {hex && (
             <CopyButton
