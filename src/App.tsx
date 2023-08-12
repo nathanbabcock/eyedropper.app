@@ -48,6 +48,7 @@ function App() {
     const hex = randomColorHex().toUpperCase()
     setHex(hex)
     updateUrl(hex)
+    updateTitle(hex)
   }
 
   // Apply class to body
