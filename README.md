@@ -44,6 +44,7 @@ pnpm deploy-prod
 > 📣 PRs Welcome! 📣
 
 ### MVP ✅
+
 - [x] Copy color to clipboard
   - [x] Automatically on click
   - [x] ...and on click of each color
@@ -60,8 +61,8 @@ pnpm deploy-prod
 ### Polish 🫧
 
 - [x] An expanding circular animation when a new color is picked
-- [ ] SEO
-- [ ] Improve Lighthouse scores (`<meta>` description, cache policy, ...)
+- [x] SEO
+- [x] Improve Lighthouse scores (`<meta>` description, cache policy, ...)
 - [x] Mac/Linux bug: <https://github.com/WICG/eyedropper-api/issues/31>
 - [x] Improve favicon
 - [x] Typography
@@ -70,6 +71,7 @@ pnpm deploy-prod
 
 ### Extra Features ✨
 
+- [ ] `opengraph` and `twitter` meta tags
 - [ ] Remember last color and preferred color format in `localStorage`
 - [ ] Accept any color format in URL fragment
   - [ ] e.g. <https://eyedropper.app/#rgb(255,255,255)>
