@@ -114,20 +114,29 @@ function App() {
       setOpen(true)
       const { sRGBHex } = await dropper.open()
       if (!sRGBHex) return
-      let hex: string
+
       // 🪲 handle bug where some browsers return RGBA instead of hex
       // <https://github.com/WICG/eyedropper-api/issues/31>
+      let hex: string
       if (sRGBHex.startsWith('rgb')) hex = rgbToHex(sRGBHex).toUpperCase()
       else hex = sRGBHex.toUpperCase()
+
+      // Update state
       setHex(hex)
       updateUrl(hex)
       updateTitle(hex)
+
+      // Copy to clipboard
       if (lastCopied === 'rgb') copy(rgbToString(hexToRgb(hex)), 'rgb')
       else copy(hex, 'hex')
     } catch (e) {
-      console.log(chalk.italic(chalk.gray('User cancelled selection')))
+      console.log(chalk.italic(chalk.gray('User canceled selection')))
     } finally {
       setOpen(false)
+
+      // Blur the eyedropper button to play its transition animation
+      if (document.activeElement instanceof HTMLElement)
+        document.activeElement.blur()
     }
   }
 
