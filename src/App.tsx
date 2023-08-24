@@ -3,6 +3,7 @@
 import chalk from 'chalk'
 import { useEffect, useState } from 'react'
 import './App.css'
+import { AppProvider, useAppContext } from './AppContext'
 import { CopyButton } from './components/CopyButton'
 import { EyedropperButton } from './components/EyedropperButton'
 import { Footer } from './components/Footer'
@@ -29,8 +30,9 @@ function logColor(color: string) {
   console.log(bgColorFunction(chalk.hex(color)(` ■ ${color} `)))
 }
 
-function App() {
-  const [open, setOpen] = useState(false)
+function AppContent() {
+  const { open, setOpen } = useAppContext()
+
   const [animations, setAnimations] = useState<string[]>([])
   const [hex, setHex] = useState<string>()
   const rgb = hex ? rgbToString(hexToRgb(hex)) : undefined
@@ -179,4 +181,10 @@ function App() {
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <AppProvider>
+      <AppContent />
+    </AppProvider>
+  )
+}
