@@ -43,6 +43,10 @@ pnpm deploy-prod
 
 > 📣 PRs Welcome! 📣
 
+### Priority ⬆️
+
+- [ ] Add `<input type="color">` for easy color adjustments & conversion
+
 ### MVP ✅
 
 - [x] Copy color to clipboard
