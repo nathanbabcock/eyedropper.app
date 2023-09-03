@@ -1,13 +1,14 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 import chalk from 'chalk'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import './App.css'
 import { AppProvider, useAppContext } from './AppContext'
 import { CopyButton } from './components/CopyButton'
 import { EyedropperButton } from './components/EyedropperButton'
 import { Footer } from './components/Footer'
 import { Unsupported } from './components/Unsupported'
+import { type ColorState } from './types/ColorState'
 import {
   getPerceivedBrightness,
   shouldShowOnDarkBackground,
@@ -34,8 +35,13 @@ function AppContent() {
   const { open, setOpen } = useAppContext()
 
   const [animations, setAnimations] = useState<string[]>([])
-  const [hex, setHex] = useState<string>()
-  const rgb = hex ? rgbToString(hexToRgb(hex)) : undefined
+  const [color, setColor] = useState<ColorState>()
+  const setHex = (hex: string, source?: ColorState['source']) =>
+    setColor({
+      hex,
+      rgb: rgbToString(hexToRgb(hex)),
+      source,
+    })
   const unsupported = window.EyeDropper === undefined
 
   // Read URL fragment on load
@@ -55,9 +61,8 @@ function AppContent() {
 
   // Apply class to body
   useEffect(() => {
-    if (!hex) return
-    const brightness = getPerceivedBrightness(hexToRgb(hex))
-    console.log({ brightness })
+    if (!color) return
+    const brightness = getPerceivedBrightness(hexToRgb(color.hex))
     if (brightness > 128) {
       document.body.classList.add('bg-light')
       document.body.classList.remove('bg-dark')
@@ -65,10 +70,13 @@ function AppContent() {
       document.body.classList.add('bg-dark')
       document.body.classList.remove('bg-light')
     }
-  }, [hex])
+  }, [color])
 
   const animationTime = 2000 // todo: must match CSS animation duration
-  const playAnimation = (hex: string) => {
+  const setBackgroundColor = (hex: string) =>
+    void (document.body.style.backgroundColor = hex)
+
+  const playAnimation = useCallback((hex: string) => {
     // const rgb = rgbToString(hexToRgb(hex))
     // if ([hex, rgb].includes(document.body.style.backgroundColor)) return
     setAnimations(animations =>
@@ -76,15 +84,20 @@ function AppContent() {
     )
     setTimeout(() => {
       setAnimations(animations => animations.filter(c => c !== hex))
-      document.body.style.backgroundColor = hex
+      setBackgroundColor(hex)
     }, animationTime)
-  }
+  }, [])
 
   useEffect(() => {
-    if (!hex) return
-    logColor(hex)
-    playAnimation(hex)
-  }, [hex])
+    if (!color) return
+
+    // `<input type="color">` fires many events per second;
+    // don't spam logs and animations when that happens.
+    if (color.source === 'colorInput') return setBackgroundColor(color.hex)
+
+    logColor(color.hex)
+    playAnimation(color.hex)
+  }, [color, playAnimation])
 
   const updateTitle = (hex: string) =>
     (document.title = `${hex.toUpperCase()} ${separatorChar} eyedropper.app`)
@@ -160,18 +173,30 @@ function AppContent() {
             isOpen={open}
           />
           {unsupported && <Unsupported />}
-          {hex && (
+          {color && (
             <CopyButton
-              children={hex}
+              children={color.hex}
               copied={lastCopied === 'hex'}
-              onClick={() => copy(hex, 'hex')}
+              onClick={() => copy(color.hex, 'hex')}
             />
           )}
-          {rgb && (
+          {color && (
             <CopyButton
-              children={rgb}
+              children={color.rgb}
               copied={lastCopied === 'rgb'}
-              onClick={() => copy(rgb, 'rgb')}
+              onClick={() => copy(color.rgb, 'rgb')}
+            />
+          )}
+          {color && (
+            <input
+              type="color"
+              value={color.hex}
+              onChange={e => setHex(e.currentTarget.value, 'colorInput')}
+              onBlur={() => {
+                logColor(color.hex)
+                updateUrl(color.hex)
+                updateTitle(color.hex)
+              }}
             />
           )}
         </main>
