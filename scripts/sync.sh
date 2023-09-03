@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# 🚧 WIP 🚧
+
 # Load env vars
 set -o allexport
 source .env
