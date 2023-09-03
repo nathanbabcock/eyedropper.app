@@ -45,7 +45,9 @@ pnpm deploy-prod
 
 ### Priority ⬆️
 
-- [ ] Add `<input type="color">` for easy color adjustments & conversion
+- [x] Add `<input type="color">` for easy color adjustments & conversion
+- [ ] Add HSL color support and use a third-party library for conversion
+- [ ] Parse colors from URL in any compatible format
 
 ### MVP ✅
 
