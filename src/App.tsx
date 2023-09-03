@@ -7,6 +7,7 @@ import { AppProvider, useAppContext } from './AppContext'
 import { CopyButton } from './components/CopyButton'
 import { EyedropperButton } from './components/EyedropperButton'
 import { Footer } from './components/Footer'
+import { InputColor } from './components/InputColor'
 import { Unsupported } from './components/Unsupported'
 import { type ColorState } from './types/ColorState'
 import {
@@ -106,10 +107,7 @@ function AppContent() {
     history.pushState(null, '', hex.toUpperCase())
 
   useEffect(() => {
-    const handler = (_event: PopStateEvent) => {
-      console.log('popstate', location.hash)
-      setHex(location.hash)
-    }
+    const handler = (_event: PopStateEvent) => void setHex(location.hash)
     // Listen for the "popstate" event to handle back and forward button clicks
     window.addEventListener('popstate', handler)
     return () => window.removeEventListener('popstate', handler)
@@ -188,14 +186,17 @@ function AppContent() {
             />
           )}
           {color && (
-            <input
-              type="color"
+            <InputColor
               value={color.hex}
               onChange={e => setHex(e.currentTarget.value, 'colorInput')}
               onBlur={() => {
                 logColor(color.hex)
                 updateUrl(color.hex)
                 updateTitle(color.hex)
+                copy(
+                  lastCopied === 'rgb' ? color.rgb : color.hex,
+                  lastCopied ?? 'hex'
+                )
               }}
             />
           )}

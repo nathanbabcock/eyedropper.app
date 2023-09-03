@@ -1,0 +1,45 @@
+.InputColor {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/**
+ * Hide the color input, but don't use `display:none`,
+ * because then the color picker popup would open to (0, 0).
+ */
+.InputColor input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  left: calc(100% + 1em);
+  top: 0%;
+}
+
+/* Common button styles */
+.InputColor label {
+  --capsule: 99999px;
+  --padding: 0.5em;
+  color: inherit;
+  border-radius: var(--capsule);
+  background-color: rgba(0, 0, 0, 0%);
+  opacity: 25%;
+  transition:
+    background-color 0.2s ease-in-out,
+    opacity 0.2s ease-in-out;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--padding);
+}
+
+.InputColor label:hover,
+.InputColor label:focus,
+.InputColor label.hover,
+.InputColor input:focus + label {
+  background-color: rgba(0, 0, 0, 25%);
+  opacity: 100%;
+}
