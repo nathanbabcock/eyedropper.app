@@ -188,7 +188,9 @@ function AppContent() {
           {color && (
             <InputColor
               value={color.hex}
-              onChange={e => setHex(e.currentTarget.value, 'colorInput')}
+              onChange={e =>
+                setHex(e.currentTarget.value.toUpperCase(), 'colorInput')
+              }
               onBlur={() => {
                 logColor(color.hex)
                 updateUrl(color.hex)
