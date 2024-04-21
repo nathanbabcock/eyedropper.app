@@ -34,7 +34,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "prettier": "^3.2.5",
-    "typescript": "5.4.5",
+    "typescript": "^5.5.0-dev",
     "vite": "^5.2.10",
     "vite-plugin-svgr": "^4.2.0"
   }
