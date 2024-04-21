@@ -4,5 +4,7 @@
 
   const win = open('https://eyedropper.app', undefined, 'popup=1')
   setTimeout(() => win.close(), 1000)
+
+  // todo: window.postMessage
 })()
 

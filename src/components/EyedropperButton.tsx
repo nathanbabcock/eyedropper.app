@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { ReactComponent as EyedropperIcon } from '../assets/eyedropper.svg'
+import EyedropperIcon from '../assets/eyedropper.svg?react'
 import styles from './EyedropperButton.module.css'
 
 export type EyedropperButtonProps = {

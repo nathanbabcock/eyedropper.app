@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { ReactComponent as CopyIcon } from '../assets/copy.svg'
+import CopyIcon from '../assets/copy.svg?react'
 import styles from './CopyButton.module.css'
 
 export type CopyButtonProps = {
