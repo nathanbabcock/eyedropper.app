@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './BookmarkletNote.module.css'
 
-export const bookmarkletLink = `javascript:alert("yo")`
-
 export function BookmarkletNote() {
   // https://legacy.reactjs.org/blog/2019/08/08/react-v16.9.0.html#deprecating-javascript-urls
   const linkRef = useRef<HTMLAnchorElement>(null)
-  useEffect(() => linkRef.current?.setAttribute('href', bookmarkletLink))
+  useEffect(() => linkRef.current?.setAttribute('href', getBookmarklet()), [])
 
   const [show, setShow] = useState(true)
   if (!show) return null
@@ -28,4 +26,34 @@ export function BookmarkletNote() {
       </div>
     </div>
   )
+}
+
+function getBookmarklet() {
+  // URL
+  const { protocol, host } = window.location
+  const url = [protocol, host].join('//')
+
+  // Positioning
+  const width = 225
+  const height = 225
+  const left = Math.round(window.screen.width - width)
+  const top = Math.round(window.screen.height - height)
+
+  // Inline script
+  const windowFeatures = [
+    'popup=1',
+    `width=${width}`,
+    `height=${height}`,
+    `left=${left}`,
+    `top=${top}`,
+  ].join(', ')
+  const bookmarklet = `(() => {
+    const win = open('${url}', 'customWindow', '${windowFeatures}');
+  })()
+  `
+
+  return `javascript:${bookmarklet
+    .split('\n')
+    .map(line => line.trim())
+    .join('')}`
 }

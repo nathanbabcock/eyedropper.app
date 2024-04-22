@@ -140,6 +140,10 @@ function AppContent() {
       updateUrl(hex)
       updateTitle(hex)
 
+      // If opened from bookmarklet, request close
+      // todo: show a closing countdown animation
+      if (window.opener) setTimeout(() => window.close(), 1000)
+
       // Copy to clipboard
       if (lastCopied === 'rgb') copy(rgbToString(hexToRgb(hex)), 'rgb')
       else copy(hex, 'hex')
