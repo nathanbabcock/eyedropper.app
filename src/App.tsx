@@ -20,6 +20,7 @@ import { preferredColorScheme } from './util/prefers-color-scheme'
 import { randomColorHex } from './util/random-color'
 import { rgbToHex } from './util/rgb-to-hex'
 import { separatorChar } from './util/separator'
+import { BookmarkletNote } from './components/BookmarkletNote'
 
 function logColor(color: string) {
   const consoleHasDarkBg = preferredColorScheme() === 'dark'
@@ -165,11 +166,14 @@ function AppContent() {
 
       <div className="foreground">
         <main className="main">
-          <EyedropperButton
-            onClick={pick}
-            disabled={unsupported}
-            isOpen={open}
-          />
+          <div style={{ position: 'relative', display: 'flex' }}>
+            <EyedropperButton
+              onClick={pick}
+              disabled={unsupported}
+              isOpen={open}
+            />
+            <BookmarkletNote />
+          </div>
           {unsupported && <Unsupported />}
           {color && (
             <CopyButton

@@ -1,0 +1,52 @@
+.BookmarkletNote {
+  position: absolute;
+  top: 50%;
+  right: -2rem;
+  font-size: 1rem;
+  width: 400px;
+  translate: 100% -50%;
+  background-color: #1a1a1a;
+  padding: 16px;
+  border-radius: 8px;
+  color: var(--light);
+
+  /* Left arrow triangle */
+  ::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    border: 8px solid transparent;
+    border-right-color: #1a1a1a;
+    transform: translateY(-50%);
+  }
+}
+
+.linkWrapper {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.link {
+  text-decoration: underline;
+}
+
+.bracket {
+  font-size: 1.25em;
+  opacity: 50%;
+}
+
+.actions {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+
+  button {
+    background: rgba(1, 1, 1, 0.66);
+  }
+}
