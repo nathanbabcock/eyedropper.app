@@ -33,10 +33,10 @@ export default [
   {
     languageOptions: { globals: globals.browser },
     rules: {
-      'comma-dangle': ['warn', 'always-multiline'],
+      'comma-dangle': 'off',
       'no-constant-condition': ['warn', { checkLoops: false }],
       'react-refresh/only-export-components': 'warn',
-      '@typescript-eslint/comma-dangle': ['warn', 'always-multiline'],
+      '@typescript-eslint/comma-dangle': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-floating-promises': 'warn',
       '@typescript-eslint/no-non-null-assertion': 'off',
