@@ -20,7 +20,7 @@ import { preferredColorScheme } from './util/prefers-color-scheme'
 import { randomColorHex } from './util/random-color'
 import { rgbToHex } from './util/rgb-to-hex'
 import { separatorChar } from './util/separator'
-import { BookmarkletNote } from './components/BookmarkletNote'
+import { usePWA } from './hooks/usePWA'
 
 function logColor(color: string) {
   const consoleHasDarkBg = preferredColorScheme() === 'dark'
@@ -34,6 +34,7 @@ function logColor(color: string) {
 }
 
 function AppContent() {
+  usePWA()
   const { open, setOpen } = useAppContext()
 
   const [animations, setAnimations] = useState<string[]>([])
@@ -176,7 +177,7 @@ function AppContent() {
               disabled={unsupported}
               isOpen={open}
             />
-            <BookmarkletNote />
+            {/* <BookmarkletNote /> */}
           </div>
           {unsupported && <Unsupported />}
           {color && (
