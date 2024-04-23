@@ -19,8 +19,7 @@ import { hexToRgb, rgbToString } from './util/hex-to-rgb'
 import { preferredColorScheme } from './util/prefers-color-scheme'
 import { randomColorHex } from './util/random-color'
 import { rgbToHex } from './util/rgb-to-hex'
-import { separatorChar } from './util/separator'
-import { usePWA } from './hooks/usePWA'
+import { isPWA, usePWA } from './hooks/usePWA'
 
 function logColor(color: string) {
   const consoleHasDarkBg = preferredColorScheme() === 'dark'
@@ -102,19 +101,6 @@ function AppContent() {
     playAnimation(color.hex)
   }, [color, playAnimation])
 
-  const updateTitle = (hex: string) =>
-    (document.title = `${hex.toUpperCase()} ${separatorChar} eyedropper.app`)
-
-  const updateUrl = (hex: string) =>
-    history.pushState(null, '', hex.toUpperCase())
-
-  useEffect(() => {
-    const handler = (_event: PopStateEvent) => void setHex(location.hash)
-    // Listen for the "popstate" event to handle back and forward button clicks
-    window.addEventListener('popstate', handler)
-    return () => window.removeEventListener('popstate', handler)
-  })
-
   const [lastCopied, setLastCopied] = useState<'hex' | 'rgb'>()
   const copy = (text: string, type: 'hex' | 'rgb') => {
     navigator.clipboard.writeText(text).catch(console.error)
@@ -143,7 +129,7 @@ function AppContent() {
 
       // If opened from bookmarklet, request close
       // todo: show a closing countdown animation
-      if (window.opener) setTimeout(() => window.close(), 1000)
+      if (window.opener || isPWA()) setTimeout(() => window.close(), 1000)
 
       // Copy to clipboard
       if (lastCopied === 'rgb') copy(rgbToString(hexToRgb(hex)), 'rgb')
@@ -225,3 +211,6 @@ export default function App() {
     </AppProvider>
   )
 }
+
+const updateTitle = (hex: string) => (document.title = hex.toUpperCase())
+const updateUrl = (hex: string) => window.location.replace(hex.toUpperCase())
